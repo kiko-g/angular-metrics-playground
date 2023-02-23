@@ -1,0 +1,9 @@
+# Ignore artifacts
+.angular
+build
+coverage
+
+# Ignore files
+package-lock.json
+yarn.lock
+
