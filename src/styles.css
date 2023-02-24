@@ -10,11 +10,11 @@ html {
 }
 
 *::selection {
-  @apply bg-fuchsia-600/75 text-white dark:bg-pink-600/60;
+  @apply bg-pink-600/70 text-white;
 }
 
 body {
-  @apply bg-light font-prose text-base font-normal text-gray-800 dark:bg-navy dark:text-white;
+  @apply bg-navy font-prose text-base font-normal text-white;
 }
 
 h1,

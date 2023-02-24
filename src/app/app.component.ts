@@ -9,33 +9,10 @@ export class AppComponent {
   year = new Date().getFullYear();
   title = "Angular Metrics Playground";
   author = "Francisco Gonçalves";
-  value = "";
+  tab = 0;
+  tabs = ["heroBolt", "heroChartPie", "heroCodeBracketSquare", "heroLightBulb", "heroPaperClip"];
 
-  actions = [
-    {
-      name: "A",
-      action: () => {
-        console.log("OLA");
-        this.value = "A";
-      },
-    },
-    {
-      name: "B",
-      action: () => {
-        this.value = "B";
-      },
-    },
-    {
-      name: "C",
-      action: () => {
-        this.value = "C";
-      },
-    },
-    {
-      name: "D",
-      action: () => {
-        this.value = "D";
-      },
-    },
-  ];
+  changeTab(tabIndex: number) {
+    this.tab = tabIndex;
+  }
 }

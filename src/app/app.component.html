@@ -1,34 +1,36 @@
 <main class="flex min-h-screen w-full flex-col justify-between">
-  <header class="flex items-center justify-between bg-navy px-4 py-3">
-    <h2 class="text-lg font-bold text-white">{{ title }}</h2>
+  <header class="flex items-center justify-between px-4 py-3">
+    <h2 class="font-bold text-white">{{ title }}</h2>
   </header>
 
-  <section class="flex flex-1 flex-col bg-slate-300 lg:flex-row">
-    <nav class="flex items-start justify-center bg-slate-800 px-8 py-8">
-      <ul class="flex min-w-[12rem] flex-col gap-y-3 rounded bg-slate-600 px-4 py-4">
-        <li *ngFor="let action of actions" class="w-full">
+  <section class="flex flex-1 flex-col lg:flex-row">
+    <nav class="flex items-start justify-center">
+      <ul class="flex flex-col">
+        <li *ngFor="let tabIcon of tabs; let t = index" class="w-full">
           <button
-            (click)="action.action()"
-            class="group w-full rounded bg-slate-400 px-3 py-2 text-white transition hover:cursor-pointer hover:bg-blue-500"
+            (click)="changeTab(t)"
+            [class.border-white]="t === tab"
+            [class.border-transparent]="t !== tab"
+            class="group w-full border-l-2 px-6 py-4 text-white transition hover:cursor-pointer hover:bg-blue-500/25"
           >
-            {{ action.name }}
+            <ng-icon size="24" name="{{ tabIcon }}"></ng-icon>
           </button>
         </li>
       </ul>
     </nav>
 
-    <article class="flex-1 px-8 py-8">
-      <h3 class="text-xl font-semibold">Playground</h3>
+    <article class="flex-1 bg-slate-800 px-8 py-8">
+      <h3 class="mb-2 text-2xl font-semibold">Playground</h3>
       <p>
         The current value is
-        <strong class="text-blue-500">{{ value === "" ? "none" : value }}</strong
-        >.
+        <strong class="text-blue-500">{{ tab }}</strong>
+        .
       </p>
     </article>
   </section>
 
-  <footer class="flex items-center justify-between border-t bg-slate-800 px-4 py-3">
-    <p class="text-sm text-gray-100">© {{ year }} Metrics Playground</p>
+  <footer class="flex items-center justify-between border-t px-4 py-3">
+    <p class="text-sm text-gray-100">© {{ title }}, {{ year }}</p>
     <p class="text-sm text-gray-300">{{ author }}</p>
   </footer>
 </main>
