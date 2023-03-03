@@ -17,4 +17,8 @@ The docker compose lifts the following containers:
 - Matomo
 - MySQL
 
-Run `docker compose up -d` in the root directory to start the other project components.
+Run the following command in the root directory to start the other project components.
+
+```bash
+docker compose up -d
+```
