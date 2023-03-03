@@ -6,3 +6,25 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    depends_on:
+      - db
+    environment:
+      - MATOMO_DATABASE_HOST=db
+      - MATOMO_DATABASE_PORT=3306
+      - MATOMO_DATABASE_USER=matomo
+      - MATOMO_DATABASE_PASSWORD=matomo
+      - MATOMO_DATABASE_NAME=matomo
+      - MATOMO_DATABASE_TABLES_PREFIX=matomo_
+      - MATOMO_DATABASE_DBNAME=cmf-analytics
+      # - MATOMO_DATABASE_ADAPTER=
+      # - MATOMO_DATABASE_USERNAME=
+
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_USER=matomo
+      - MYSQL_PASSWORD=matomo
+      - MYSQL_DATABASE=matomo
+      - MYSQL_ROOT_PASSWORD=my-secret-pw
