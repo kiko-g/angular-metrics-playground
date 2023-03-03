@@ -12,19 +12,22 @@ services:
       - MATOMO_DATABASE_HOST=db
       - MATOMO_DATABASE_PORT=3306
       - MATOMO_DATABASE_USER=matomo
-      - MATOMO_DATABASE_PASSWORD=matomo
       - MATOMO_DATABASE_NAME=matomo
+      - MATOMO_DATABASE_USERNAME=cmf
+      - MATOMO_DATABASE_PASSWORD=matomo
       - MATOMO_DATABASE_TABLES_PREFIX=matomo_
       - MATOMO_DATABASE_DBNAME=cmf-analytics
-      # - MATOMO_DATABASE_ADAPTER=
-      # - MATOMO_DATABASE_USERNAME=
+      - MATOMO_DATABASE_ADAPTER=PDO\MYSQL
+      # - MATOMO_SUPERUSER=cmf-superuser
+      # - MATOMO_SUPERUSER_PASSWORD=cmf-matomo
+      # - MATOMO_SUPERUSER=franciscogoncalves@criticalmanufacturing.com
 
   db:
     image: mysql:5.7
     ports:
       - "3306:3306"
     environment:
-      - MYSQL_USER=matomo
+      - MYSQL_USER=cmf
       - MYSQL_PASSWORD=matomo
-      - MYSQL_DATABASE=matomo
+      - MYSQL_DATABASE=cmf-analytics
       - MYSQL_ROOT_PASSWORD=my-secret-pw
