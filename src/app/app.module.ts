@@ -12,6 +12,8 @@ import {
   heroLightBulb,
   heroPaperClip,
 } from "@ng-icons/heroicons/outline";
+import { NgxMatomoTrackerModule } from '@ngx-matomo/tracker';
+import { NgxMatomoRouterModule } from '@ngx-matomo/router';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +27,8 @@ import {
       heroLightBulb,
       heroPaperClip,
     }),
+    NgxMatomoTrackerModule.forRoot({ trackerUrl: '', siteId: '' }),
+    NgxMatomoRouterModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
