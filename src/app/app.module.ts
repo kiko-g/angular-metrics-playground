@@ -1,3 +1,7 @@
+import { isDevMode } from "@angular/core";
+import envDevelopment from "../env/environment";
+import envProduction from "../env/environment.prod";
+
 import { NgModule } from "@angular/core";
 import { NgIconsModule } from "@ng-icons/core";
 import { BrowserModule } from "@angular/platform-browser";
@@ -12,8 +16,10 @@ import {
   heroLightBulb,
   heroPaperClip,
 } from "@ng-icons/heroicons/outline";
-import { NgxMatomoTrackerModule } from '@ngx-matomo/tracker';
-import { NgxMatomoRouterModule } from '@ngx-matomo/router';
+import { NgxMatomoTrackerModule } from "@ngx-matomo/tracker";
+import { NgxMatomoRouterModule } from "@ngx-matomo/router";
+
+const env = isDevMode() ? envDevelopment : envProduction;
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,10 +33,15 @@ import { NgxMatomoRouterModule } from '@ngx-matomo/router';
       heroLightBulb,
       heroPaperClip,
     }),
-    NgxMatomoTrackerModule.forRoot({ trackerUrl: '', siteId: '' }),
+    NgxMatomoTrackerModule.forRoot({
+      trackerUrl: env.matomoUrl,
+      siteId: envProduction.matomoSiteId,
+    }),
     NgxMatomoRouterModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  env = env;
+}
