@@ -10,10 +10,17 @@ services:
       - db
     env_file:
       - .env
-
+    volumes:
+      - matomo_data:/var/www/html
   db:
     image: mysql:latest
     ports:
       - "3306:3306"
     env_file:
       - .env
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  matomo_data:
+  db_data:
