@@ -27,7 +27,7 @@ module.exports = {
       },
       fontFamily: {
         prose: ["Inter", ...defaultTheme.fontFamily.sans],
-        headings: ["Lexend", ...defaultTheme.fontFamily.sans],
+        lexend: ["Lexend", ...defaultTheme.fontFamily.sans],
         code: ["Fira Code", ...defaultTheme.fontFamily.mono],
         flow: "Flow",
       },

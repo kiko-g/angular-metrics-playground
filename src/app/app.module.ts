@@ -15,6 +15,7 @@ import {
   heroCodeBracketSquare,
   heroLightBulb,
   heroPaperClip,
+  heroArrowTopRightOnSquare,
 } from "@ng-icons/heroicons/outline";
 import { NgxMatomoTrackerModule } from "@ngx-matomo/tracker";
 import { NgxMatomoRouterModule } from "@ngx-matomo/router";
@@ -32,6 +33,7 @@ const env = isDevMode() ? envDevelopment : envProduction;
       heroCodeBracketSquare,
       heroLightBulb,
       heroPaperClip,
+      heroArrowTopRightOnSquare,
     }),
     NgxMatomoTrackerModule.forRoot({
       trackerUrl: env.matomoUrl,

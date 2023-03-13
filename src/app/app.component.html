@@ -1,17 +1,27 @@
 <main class="flex min-h-screen w-full flex-col justify-between">
   <header class="flex items-center justify-between px-4 py-3">
     <h2 class="font-bold text-white">{{ title }}</h2>
+    <div>
+      <a
+        target="_blank"
+        href="http://localhost:80"
+        class="flex items-center justify-center gap-x-2 hover:text-blue-300"
+      >
+        <span>Dashboard</span>
+        <ng-icon size="20" name="heroArrowTopRightOnSquare"></ng-icon>
+      </a>
+    </div>
   </header>
 
   <section class="flex flex-1 flex-col lg:flex-row">
-    <nav class="flex items-start justify-center">
-      <ul class="flex flex-col">
-        <li *ngFor="let tabIcon of tabs; let t = index" class="w-full">
+    <nav class="flex items-start justify-start">
+      <ul class="flex flex-row lg:flex-col">
+        <li *ngFor="let tabIcon of tabs; let t = index" class="w-full border-white">
           <button
             (click)="changeTab(t)"
             [class.border-white]="t === tab"
             [class.border-transparent]="t !== tab"
-            class="group w-full border-l-2 px-6 py-4 text-white transition hover:cursor-pointer hover:bg-blue-500/25"
+            class="group w-full border-b-2 border-l-0 border-white px-6 py-4 text-white transition hover:cursor-pointer hover:bg-blue-500/25 lg:border-b-0 lg:border-l-2"
           >
             <ng-icon size="24" name="{{ tabIcon }}"></ng-icon>
           </button>
@@ -19,13 +29,68 @@
       </ul>
     </nav>
 
-    <article class="flex-1 bg-slate-800 px-8 py-8">
-      <h3 class="mb-2 text-2xl font-semibold">Playground</h3>
-      <p>
-        The current value is
-        <strong class="text-blue-500">{{ tab }}</strong>
-        .
-      </p>
+    <article class="flex flex-1 flex-col gap-4 bg-slate-800 px-8 py-8">
+      <!-- Header -->
+      <div>
+        <h3 class="mb-1 text-2xl font-semibold">Playground</h3>
+        <p>
+          The current tab value is
+          <strong class="text-blue-500">{{ tab }}</strong>
+        </p>
+
+        <p>
+          The current step phase is
+          <strong class="text-teal-500">{{ step }}</strong>
+        </p>
+      </div>
+
+      <!-- Wizard -->
+      <section class="flex w-full flex-1 flex-col gap-y-4 rounded bg-blue-100/5 p-5">
+        <!-- Steps -->
+        <div>
+          <div
+            class="relative mt-1 after:absolute after:inset-x-0 after:top-1/2 after:block after:h-0.5 after:-translate-y-1/2 after:rounded-lg after:bg-red-100"
+          >
+            <ul class="relative z-10 flex justify-between text-sm font-medium">
+              <li *ngFor="let stepName of steps; let s = index">
+                <span
+                  [className]="
+                    s <= step
+                      ? 'rounded-full px-3 py-2 text-center bg-blue-600 text-white'
+                      : 'bg-gray-300 text-gray-800 rounded-full px-3 py-2 text-center'
+                  "
+                >
+                  {{ stepName }}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="mt-2 flex-1 rounded"></div>
+
+        <!-- Submit -->
+        <div class="flex items-center justify-end gap-3">
+          <button
+            (click)="prevStep()"
+            [disabled]="submitted || step === 0"
+            class="rounded px-4 py-2 text-white transition enabled:bg-rose-600/80 enabled:hover:opacity-80 disabled:cursor-not-allowed disabled:bg-rose-700/20"
+          >
+            Back
+          </button>
+
+          <button
+            (click)="nextStep()"
+            [disabled]="completed && submitted"
+            class="rounded px-4 py-2 text-white transition enabled:hover:opacity-80 {{
+              completed ? 'enabled:bg-teal-600' : 'enabled:bg-blue-600'
+            }} disabled:cursor-not-allowed disabled:bg-rose-700/20"
+          >
+            {{ completed ? "Submit" : "Next" }}
+          </button>
+        </div>
+      </section>
     </article>
   </section>
 
