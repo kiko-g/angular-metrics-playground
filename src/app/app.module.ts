@@ -1,4 +1,4 @@
-import { isDevMode } from "@angular/core";
+import { Injectable, isDevMode } from "@angular/core";
 import envDevelopment from "../env/environment";
 import envProduction from "../env/environment.prod";
 
@@ -17,8 +17,12 @@ import {
   heroPaperClip,
   heroArrowTopRightOnSquare,
 } from "@ng-icons/heroicons/outline";
-import { NgxMatomoTrackerModule } from "@ngx-matomo/tracker";
-import { NgxMatomoRouterModule } from "@ngx-matomo/router";
+import { MatomoTracker, NgxMatomoTrackerModule } from "@ngx-matomo/tracker";
+import {
+  MatomoRouteDataInterceptor,
+  MatomoRouterInterceptor,
+  NgxMatomoRouterModule,
+} from "@ngx-matomo/router";
 
 const env = isDevMode() ? envDevelopment : envProduction;
 
@@ -39,7 +43,10 @@ const env = isDevMode() ? envDevelopment : envProduction;
       trackerUrl: env.matomoUrl,
       siteId: envProduction.matomoSiteId,
     }),
-    NgxMatomoRouterModule,
+    NgxMatomoRouterModule.forRoot({
+      // Declare built-in MatomoRouteDataInterceptor
+      interceptors: [MatomoRouteDataInterceptor],
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

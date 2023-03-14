@@ -1,11 +1,20 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { MatomoTracker } from "@ngx-matomo/tracker";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  constructor(private readonly tracker: MatomoTracker) {}
+
+  ngOnInit() {
+    this.tracker.trackPageView();
+    this.tracker.trackEvent("Tab", "Clicked", "Label", this.tab);
+    this.tracker.trackEvent("Wizard", "Clicked", "Step", this.step);
+  }
+
   year = new Date().getFullYear();
   title = "Angular Metrics Playground";
   author = "Francisco Gonçalves";
