@@ -22,3 +22,14 @@ Run the following command in the root directory to start the other project compo
 ```bash
 docker compose up -d
 ```
+
+## Metrics to Track
+
+- Page views (what are the most used and accessed areas)
+- Browser (most used)
+- Devices (screen size most used)
+- Navigation (flows)
+- Navigation + detailed: number of clicks, the hesitations between clicks, the back and next clicks on wizard, etc.
+- Success rates of a given task (e.g., click the final submit button in a wizard)
+- Telemetry – cross-reference/collect data with Open Telemetry
+- CES (Customer Effort Score) - how much effort your customer needs to use to complete a transaction/task.

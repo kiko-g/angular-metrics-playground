@@ -7,12 +7,15 @@ import { MatomoTracker } from "@ngx-matomo/tracker";
   styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements OnInit {
-  constructor(private readonly tracker: MatomoTracker) {}
+  constructor(private readonly matomoTracker: MatomoTracker) {}
 
   ngOnInit() {
-    this.tracker.trackPageView();
-    this.tracker.trackEvent("Tab", "Clicked", "Label", this.tab);
-    this.tracker.trackEvent("Wizard", "Clicked", "Step", this.step);
+    this.matomoTracker.trackPageView();
+    this.matomoTracker.trackEvent("AppComponent", "Clicked", "Label", this.tab);
+    this.matomoTracker.trackEvent("AppComponent", "Clicked", "Step", this.step);
+    this.matomoTracker.trackEvent("AppComponent", "completed", "true");
+    this.matomoTracker.setCustomVariable(1, "Tab", this.tab.toString(), "page");
+    this.matomoTracker.setCustomVariable(2, "Step", this.step.toString(), "event");
   }
 
   year = new Date().getFullYear();
@@ -35,9 +38,7 @@ export class AppComponent implements OnInit {
     if (!this.completed) {
       this.step += 1;
       if (this.step === this.steps.length - 1) this.completed = true;
-    } else {
-      this.submitted = true;
-    }
+    } else this.submitted = true;
   }
 
   prevStep() {
