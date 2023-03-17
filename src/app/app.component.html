@@ -82,12 +82,12 @@
 
           <button
             (click)="nextStep()"
-            [disabled]="completed && submitted"
+            [disabled]="ready && submitted"
             class="rounded px-4 py-2 text-white transition enabled:hover:opacity-80 {{
-              completed ? 'enabled:bg-teal-600' : 'enabled:bg-blue-600'
+              ready ? 'enabled:bg-teal-600' : 'enabled:bg-blue-600'
             }} disabled:cursor-not-allowed disabled:bg-rose-700/20"
           >
-            {{ completed ? "Submit" : "Next" }}
+            {{ ready ? "Submit" : "Next" }}
           </button>
         </div>
       </section>

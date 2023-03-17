@@ -12,26 +12,38 @@ export class AppComponent implements OnInit {
   constructor(private readonly matomoTracker: MatomoTracker) {}
 
   year = new Date().getFullYear();
-  title = "Angular Metrics Playground";
   author = "Francisco Gonçalves";
+  title = "Angular Metrics Playground";
+  tabs = ["heroBolt", "heroChartPie", "heroCodeBracketSquare", "heroLightBulb", "heroPaperClip"];
+  steps = ["A", "B", "C", "D", "E"];
+
   tab = 0;
   step = 0;
-  completed = false;
+  ready = false;
   submitted = false;
-  steps = ["A", "B", "C", "D", "E"];
-  tabs = ["heroBolt", "heroChartPie", "heroCodeBracketSquare", "heroLightBulb", "heroPaperClip"];
 
-  // Add these methods
-  trackStepChange(step: number) {
+  // track wizard completed state
+  trackSubmittedChange(submitted: boolean) {
+    this.matomoTracker.trackEvent(
+      "AppComponent",
+      "Wizard Submission",
+      submitted ? "Submitted" : "Not Submitted"
+    );
+  }
+
+  // track wizard step change
+  trackWizardStepChange(step: number) {
     this.matomoTracker.trackEvent("AppComponent", "StepChange", "Step", step);
     this.matomoTracker.setCustomVariable(2, "Step", step.toString(), "event");
   }
 
+  // track tab value change
   trackTabChange(tab: number) {
     this.matomoTracker.trackEvent("AppComponent", "TabChange", "Tab", tab);
     this.matomoTracker.setCustomVariable(1, "Tab", tab.toString(), "page");
   }
 
+  submittedChange = new EventEmitter<boolean>();
   stepChange = new EventEmitter<number>();
   tabChange = new EventEmitter<number>();
   private subscription = new Subscription();
@@ -39,16 +51,24 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.matomoTracker.trackPageView();
 
-    // Subscribe to stepChange and tabChange events
+    // track step value
     this.subscription.add(
       this.stepChange.subscribe((step) => {
-        this.trackStepChange(step);
+        this.trackWizardStepChange(step);
       })
     );
 
+    // track tab value
     this.subscription.add(
       this.tabChange.subscribe((tab) => {
         this.trackTabChange(tab);
+      })
+    );
+
+    // track submitted value
+    this.subscription.add(
+      this.submittedChange.subscribe((submitted) => {
+        this.trackSubmittedChange(submitted);
       })
     );
   }
@@ -63,23 +83,26 @@ export class AppComponent implements OnInit {
   }
 
   nextStep() {
-    if (this.completed && this.submitted) return;
+    if (this.ready && this.submitted) return;
 
-    if (!this.completed) {
+    if (this.ready) {
+      this.submitted = true;
+      this.submittedChange.emit(this.submitted); // Emit the event
+    } else {
       this.step += 1;
-      if (this.step === this.steps.length - 1) this.completed = true;
-    } else this.submitted = true;
-
-    this.stepChange.emit(this.step); // Emit the event
+      this.stepChange.emit(this.step); // Emit the event
+      if (this.step === this.steps.length - 1) this.ready = true;
+    }
   }
 
   prevStep() {
     if (this.submitted) return;
-    if (!this.completed && this.step !== 0) {
+
+    if (this.step > 0 && !this.ready) {
       this.step -= 1;
-    } else if (this.completed) {
+    } else if (this.ready) {
       this.step -= 1;
-      this.completed = false;
+      this.ready = false;
     }
 
     this.stepChange.emit(this.step); // Emit the event
