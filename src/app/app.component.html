@@ -76,7 +76,7 @@
             <button
               (click)="reset()"
               [disabled]="!submitted"
-              class="rounded px-4 py-2 text-white transition enabled:bg-rose-600/80 enabled:hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-20"
+              class="rounded px-4 py-2 text-white transition enabled:bg-rose-600/80 enabled:hover:opacity-80 disabled:cursor-not-allowed disabled:bg-white/20 disabled:opacity-20"
             >
               Reset
             </button>
@@ -86,7 +86,7 @@
             <button
               (click)="prevStep()"
               [disabled]="submitted || step === 0"
-              class="rounded px-4 py-2 text-white transition enabled:bg-slate-400/80 enabled:hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-20"
+              class="rounded px-4 py-2 text-white transition enabled:bg-slate-400/80 enabled:hover:opacity-80 disabled:cursor-not-allowed disabled:bg-white/20 disabled:opacity-20"
             >
               Back
             </button>
@@ -96,7 +96,7 @@
               [disabled]="ready && submitted"
               class="rounded px-4 py-2 text-white transition enabled:hover:opacity-80 {{
                 ready ? 'enabled:bg-teal-600' : 'enabled:bg-blue-600'
-              }} disabled:cursor-not-allowed disabled:opacity-20"
+              }} disabled:cursor-not-allowed disabled:bg-white/20 disabled:opacity-20"
             >
               {{ ready ? "Submit" : "Next" }}
             </button>
