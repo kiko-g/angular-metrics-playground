@@ -71,24 +71,36 @@
         <div class="mt-2 flex-1 rounded"></div>
 
         <!-- Submit -->
-        <div class="flex items-center justify-end gap-3">
-          <button
-            (click)="prevStep()"
-            [disabled]="submitted || step === 0"
-            class="rounded px-4 py-2 text-white transition enabled:bg-rose-600/80 enabled:hover:opacity-80 disabled:cursor-not-allowed disabled:bg-rose-700/20"
-          >
-            Back
-          </button>
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <button
+              (click)="reset()"
+              [disabled]="!submitted"
+              class="rounded px-4 py-2 text-white transition enabled:bg-rose-600/80 enabled:hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-20"
+            >
+              Reset
+            </button>
+          </div>
 
-          <button
-            (click)="nextStep()"
-            [disabled]="ready && submitted"
-            class="rounded px-4 py-2 text-white transition enabled:hover:opacity-80 {{
-              ready ? 'enabled:bg-teal-600' : 'enabled:bg-blue-600'
-            }} disabled:cursor-not-allowed disabled:bg-rose-700/20"
-          >
-            {{ ready ? "Submit" : "Next" }}
-          </button>
+          <div class="flex items-center gap-3">
+            <button
+              (click)="prevStep()"
+              [disabled]="submitted || step === 0"
+              class="rounded px-4 py-2 text-white transition enabled:bg-slate-400/80 enabled:hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-20"
+            >
+              Back
+            </button>
+
+            <button
+              (click)="nextStep()"
+              [disabled]="ready && submitted"
+              class="rounded px-4 py-2 text-white transition enabled:hover:opacity-80 {{
+                ready ? 'enabled:bg-teal-600' : 'enabled:bg-blue-600'
+              }} disabled:cursor-not-allowed disabled:opacity-20"
+            >
+              {{ ready ? "Submit" : "Next" }}
+            </button>
+          </div>
         </div>
       </section>
     </article>

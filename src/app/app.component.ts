@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   submitted = false;
 
   // track wizard completed state
-  trackSubmittedChange(submitted: boolean) {
+  tracksubmitChange(submitted: boolean) {
     this.matomoTracker.trackEvent(
       "AppComponent",
       "Wizard Submission",
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
     this.matomoTracker.setCustomVariable(1, "Tab", tab.toString(), "page");
   }
 
-  submittedChange = new EventEmitter<boolean>();
+  submitChange = new EventEmitter<boolean>();
   stepChange = new EventEmitter<number>();
   tabChange = new EventEmitter<number>();
   private subscription = new Subscription();
@@ -67,8 +67,8 @@ export class AppComponent implements OnInit {
 
     // track submitted value
     this.subscription.add(
-      this.submittedChange.subscribe((submitted) => {
-        this.trackSubmittedChange(submitted);
+      this.submitChange.subscribe((submitted) => {
+        this.tracksubmitChange(submitted);
       })
     );
   }
@@ -87,7 +87,7 @@ export class AppComponent implements OnInit {
 
     if (this.ready) {
       this.submitted = true;
-      this.submittedChange.emit(this.submitted); // Emit the event
+      this.submitChange.emit(this.submitted); // Emit the event
     } else {
       this.step += 1;
       this.stepChange.emit(this.step); // Emit the event
@@ -106,5 +106,14 @@ export class AppComponent implements OnInit {
     }
 
     this.stepChange.emit(this.step); // Emit the event
+  }
+
+  reset() {
+    this.step = 0;
+    this.ready = false;
+    this.submitted = false;
+    this.stepChange.emit(this.step); // Emit the event
+    this.submitChange.emit(this.submitted); // Emit the event
+    this.matomoTracker.setCustomVariable(4, "Wizard Reset", "Reset", "event");
   }
 }
