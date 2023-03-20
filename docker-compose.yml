@@ -20,6 +20,14 @@ services:
       - .env
     volumes:
       - db_data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80"
+    env_file:
+      - .env
+    depends_on:
+      - db
 
 volumes:
   matomo_data:
