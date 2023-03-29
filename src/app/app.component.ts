@@ -49,11 +49,7 @@ export class AppComponent implements OnInit {
     const y = event.clientY;
     const timestamp = new Date().toISOString();
 
-    this.matomoTracker.trackEvent(
-      "MouseClick",
-      "Position",
-      `X: ${x}, Y: ${y}, Timestamp: ${timestamp}`
-    );
+    this.matomoTracker.trackEvent("MouseClick", "Position", `${x},${y},${timestamp}`);
   }
 
   submitChange = new EventEmitter<boolean>();
