@@ -22,33 +22,14 @@ admin
 admin
 ```
 
-## Angular Metrics Playground
+## PHP My Admin
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
+### Login
 
-### Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-### Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-### Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-### Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-### Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-### Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+root
+my-secret-pw
+```
 
 ## Matomo
 
@@ -126,3 +107,31 @@ Matomo comes with default settings. You can customize them now or do so later in
 - **Automatically configure geolocation using a dbip database**: For a proper geolocation Matomo requires an external database. Using this option, Matomo will automatically be configured to download and use the latest dbip city level database. [[View licensing terms](https://db-ip.com/db/lite.php?refid=mtm)]
 - **Enable Do Not Track support**: When users have set their web browser to "I do not want to be tracked" (DoNotTrack is enabled) then Matomo will not track these visits.
 - **Anonymize the last byte(s) of visitors IP addresses to comply with your local privacy laws/guidelines.**: When users visit your website, Matomo will not use the full IP address (such as 213.34.51.91) but instead Matomo will anonymize it first (to 213.34.0.0). IP address anonymisation is one of the requirements set by the privacy laws in some countries such as Germany.
+
+## Angular Metrics Playground
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
+
+### Development server
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+### Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+### Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+### Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+### Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+### Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
