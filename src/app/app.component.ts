@@ -43,6 +43,19 @@ export class AppComponent implements OnInit {
     this.matomoTracker.setCustomVariable(1, "Tab", tab.toString(), "page");
   }
 
+  // track mouse click
+  trackMouseClick(event: MouseEvent) {
+    const x = event.clientX;
+    const y = event.clientY;
+    const timestamp = new Date().toISOString();
+
+    this.matomoTracker.trackEvent(
+      "MouseClick",
+      "Position",
+      `X: ${x}, Y: ${y}, Timestamp: ${timestamp}`
+    );
+  }
+
   submitChange = new EventEmitter<boolean>();
   stepChange = new EventEmitter<number>();
   tabChange = new EventEmitter<number>();
@@ -71,6 +84,10 @@ export class AppComponent implements OnInit {
         this.tracksubmitChange(submitted);
       })
     );
+
+    document.addEventListener("click", (event) => {
+      this.trackMouseClick(event as MouseEvent);
+    });
   }
 
   ngOnDestroy() {
