@@ -28,7 +28,7 @@ admin
 
 ```
 root
-my-secret-pw
+root
 ```
 
 ## Matomo
