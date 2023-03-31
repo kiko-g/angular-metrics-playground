@@ -29,13 +29,13 @@ export class AppComponent implements OnInit {
 
   // track wizard step change
   trackWizardStepChange(step: number) {
-    this.matomoTracker.trackEvent("App Component", `Step Change: ${step}`, "Step Value", step);
+    this.matomoTracker.trackEvent("App Component", `Step Change: ${step}`, undefined, step);
     this.matomoTracker.setCustomVariable(2, "Step", step.toString(), "event");
   }
 
   // track tab value change
   trackTabChange(tab: number) {
-    this.matomoTracker.trackEvent("App Component", `Tab Change: ${tab}`, "Tab Value", tab);
+    this.matomoTracker.trackEvent("App Component", `Tab Change: ${tab}`, undefined, tab);
     this.matomoTracker.setCustomVariable(1, "Tab", tab.toString(), "page");
   }
 
@@ -43,10 +43,11 @@ export class AppComponent implements OnInit {
   trackMouseClick(event: MouseEvent) {
     const x = event.clientX;
     const y = event.clientY;
-    const timestamp = new Date().toISOString();
-    const formattedMouseClick = `${x},${y},${timestamp}`;
+    const dateString = new Date().toISOString();
+    const formattedMouseClick = `${x},${y},${dateString}`;
+    const categoryName = "Mouse Click";
 
-    this.matomoTracker.trackEvent("Mouse Click", formattedMouseClick, "X,Y,DateString");
+    this.matomoTracker.trackEvent(categoryName, formattedMouseClick, formattedMouseClick);
   }
 
   submitChange = new EventEmitter<boolean>();
